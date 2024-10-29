@@ -1,5 +1,6 @@
 ﻿using Academy.Application.Dtos;
 using Academy.Application.Services.StudentService;
+using Academy.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace Academy.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class StudentsController : ControllerBase
     {
         private readonly IStudentService _studentManager;

@@ -11,42 +11,15 @@ namespace Academy.AuthenticationService;
 public class JwtAuthManager : IJwtAuthService
 {
     private readonly JwtSettings _jwtSettings;
-    private readonly List<User> _users;
 
     public JwtAuthManager(IOptions<JwtSettings> options)
     {
          _jwtSettings = options.Value;
-
-        _users = new List<User>() 
-        { 
-            new User()
-            {
-                Username="Sahlar",
-                Password = "123",
-                Email = "sahlar@code.az",
-                Role = "Admin"
-            },
-            new User()
-            {
-                Username="Yusif",
-                Password = "123",
-                Email = "yusif@code.az",
-                Role = "Member"
-            }
-        };
     }
 
     public async Task<JwtTokenResponseModel> CreateToken(JwtTokenRequestModel model)
     {
-        var user = _users.Find(x => x.Username == model.Username);
-
-        if (user == null)
-            throw new Exception();
-
-        if (user.Password != model.Password)
-            throw new Exception();
-
-        var jwtSecurityToken = CreateJwtToken(user);
+        var jwtSecurityToken = CreateJwtToken(model);
 
         return new JwtTokenResponseModel
         {
@@ -54,14 +27,16 @@ public class JwtAuthManager : IJwtAuthService
         };
     }
 
-    private JwtSecurityToken CreateJwtToken(User user)
+    private JwtSecurityToken CreateJwtToken(JwtTokenRequestModel model)
     {
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("roles",user.Role)
+            new Claim(JwtRegisteredClaimNames.Sub, model.Username),
+            new Claim(JwtRegisteredClaimNames.Email, model.Email),
+            //new Claim("roles",string.Join(",",model.Roles))
         };
+
+        claims.AddRange(model.Roles.Select(x => new Claim(ClaimTypes.Role, x)));
 
         var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
         var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
@@ -73,12 +48,4 @@ public class JwtAuthManager : IJwtAuthService
             signingCredentials: signingCredentials);
         return jwtSecurityToken;
     }
-}
-
-class User
-{
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Email { get; set; }
-    public string Role { get; set; }
 }

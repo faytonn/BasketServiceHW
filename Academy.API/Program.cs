@@ -1,8 +1,11 @@
 using Academy.Application;
 using Academy.AuthenticationService.Model;
+using Academy.Domain.Entities;
 using Academy.Persistence;
+using Academy.Persistence.Context;
 using Core.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -11,7 +14,7 @@ namespace Academy.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +50,15 @@ namespace Academy.API
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddSecurityServices();
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 4;
+
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -84,6 +96,15 @@ namespace Academy.API
             });
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+                var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var dataInitializer = new DataInitializer(userManager, roleManager, appDbContext, config);
+                await dataInitializer.SeedData();
+            }
 
             if (app.Environment.IsDevelopment())
             {
@@ -101,7 +122,7 @@ namespace Academy.API
 
             app.MapControllers();
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }
