@@ -21,22 +21,29 @@ namespace Academy.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public class LoginVm
         {
-            var existUser = await _userManager.FindByNameAsync(username);
+            public string username { get; set; }
+            public string password { get; set; }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([FromBody]LoginVm vm)
+        {
+            var existUser = await _userManager.FindByNameAsync(vm.username);
 
             if (existUser == null) return BadRequest();
 
-            var passwordIsCorrect = await _userManager.CheckPasswordAsync(existUser, password);
+            var passwordIsCorrect = await _userManager.CheckPasswordAsync(existUser, vm.password);
 
             if (!passwordIsCorrect) return BadRequest();
 
             var roles = (await _userManager.GetRolesAsync(existUser)).ToList();
             var requestModel = new JwtTokenRequestModel
             {
-                Username = username,
-                Password = password,
+                Username = vm.username,
+                Password = vm.password,
                 Roles = roles,
                 Email = existUser.Email!
             };

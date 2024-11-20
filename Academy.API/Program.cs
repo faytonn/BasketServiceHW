@@ -96,6 +96,9 @@ namespace Academy.API
             });
 
             var app = builder.Build();
+
+            app.UseMiddleware<GlobalExceptionHandler>();
+
             using (var scope = app.Services.CreateScope())
             {
                 var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();

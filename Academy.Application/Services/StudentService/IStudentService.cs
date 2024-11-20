@@ -8,16 +8,16 @@ namespace Academy.Application.Services.StudentService;
 
 public interface IStudentService
 {
-    Task<StudentDto?> GetAsync(int id);
+    Task<ResponseDto<StudentDto?>> GetAsync(int id);
 
-    Task<StudentDto?> GetAsync(Expression<Func<Student, bool>> predicate, Func<IQueryable<Student>, IIncludableQueryable<Student, object>>? include = null);
+    Task<ResponseDto<StudentDto?>> GetAsync(Expression<Func<Student, bool>> predicate, Func<IQueryable<Student>, IIncludableQueryable<Student, object>>? include = null);
 
-    Task<StudentListDto> GetListAsync(Expression<Func<Student, bool>>? predicate = null,
+    Task<ResponseDto<StudentListDto>> GetListAsync(Expression<Func<Student, bool>>? predicate = null,
                                     Func<IQueryable<Student>, IOrderedQueryable<Student>>? orderBy = null,
                                     Func<IQueryable<Student>, IIncludableQueryable<Student, object>>? include = null,
                                     int index = 0, int size = 10, bool enableTracking = true);
 
-    Task<StudentDto> AddAsync(StudentCreateDto createDto);
-    Task<StudentDto> UpdateAsync(int id, StudentUpdateDto updateDto);
-    Task<StudentDto> DeleteAsync(int id);
+    Task<ResponseDto<StudentDto>> AddAsync(StudentCreateDto createDto);
+    Task<ResponseDto<StudentDto>> UpdateAsync(int id, StudentUpdateDto updateDto);
+    Task<ResponseDto<StudentDto>> DeleteAsync(int id);
 }
