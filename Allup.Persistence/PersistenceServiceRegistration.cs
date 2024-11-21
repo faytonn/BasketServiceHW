@@ -17,6 +17,7 @@ public static class PersistenceServiceRegistration
         });
 
         services.AddScoped<ILanguageRepository, LanguageRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<DataInitializer>();
 
         return services;

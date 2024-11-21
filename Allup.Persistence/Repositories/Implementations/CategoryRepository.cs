@@ -5,9 +5,9 @@ using Core.Persistence.Repositories;
 
 namespace Allup.Persistence.Repositories.Implementations;
 
-public class LanguageRepository : EfRepositoryBase<Language, AppDbContext>, ILanguageRepository
+public class CategoryRepository : EfRepositoryBase<Category, AppDbContext>, ICategoryRepository
 {
-    public LanguageRepository(AppDbContext context) : base(context)
+    public CategoryRepository(AppDbContext context) : base(context)
     {
     }
 }

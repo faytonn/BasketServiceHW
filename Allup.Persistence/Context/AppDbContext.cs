@@ -12,4 +12,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
     }
 
     public required DbSet<Language> Languages { get; set; }
+    public required DbSet<Category> Categories { get; set; }
+    public required DbSet<CategoryTranslation> CategoriesTranslations { get; set; }
 }

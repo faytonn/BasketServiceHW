@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Drawing;
+using System.Linq.Expressions;
 using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -79,8 +80,18 @@ public class EfRepositoryBase<TEntity, TContext> : IRepositoryAsync<TEntity>
         return entityEntry.Entity;
     }
 
-    public async Task<List<TEntity>> GetAllAsync()
+    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null,
+                                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                    Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
     {
-        return await Context.Set<TEntity>().ToListAsync();
+        IQueryable<TEntity> queryable = Context.Set<TEntity>();
+
+        if (include != null) queryable = include(queryable);
+
+        if (predicate != null) queryable = queryable.Where(predicate);
+
+        if (orderBy != null) queryable = orderBy(queryable);
+
+        return await queryable.ToListAsync();
     }
 }

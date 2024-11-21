@@ -1,9 +1,9 @@
 ﻿using Allup.Application.ViewModels;
+using Allup.Domain.Entities;
 
 namespace Allup.Application.Services.Abstracts;
 
-public interface ILanguageService
+public interface ILanguageService : ICrudService<LanguageViewModel, Language>
 {
-    Task<List<LanguageViewModel>> GetLanguagesAsync();
     Task<LanguageViewModel> GetLanguageAsync(string isoCode);
 }

@@ -14,6 +14,8 @@ namespace Allup.Application.Profiles
         public AutoMapping()
         {
             CreateMap<LanguageViewModel, Language>().ReverseMap();
+            CreateMap<Category, CategoryViewModel>().ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CategoryTranslations.FirstOrDefault().Name)).ReverseMap();
+            CreateMap<CategoryTranslationViewModel, CategoryTranslation>().ReverseMap();
         }
     }
 }

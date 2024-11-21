@@ -17,7 +17,7 @@ namespace Allup.MVC.ViewComponenets
 
         public async Task<ViewViewComponentResult> InvokeAsync()
         {
-            var languages = await _languageService.GetLanguagesAsync();
+            var languages = await _languageService.GetAllAsync();
             var culture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
             var isoCode = culture?.Substring(culture.LastIndexOf("=") + 1) ?? "en-Us";
             var selectedLanguage = await _languageService.GetLanguageAsync(isoCode);

@@ -15,7 +15,9 @@ public interface IRepositoryAsync<T> where T : Entity
                                     Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
                                     int index = 0, int size = 10, bool enableTracking = true);
 
-    Task<List<T>> GetAllAsync();
+    Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null,
+                                    Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+                                    Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
     Task<T> AddAsync(T entity);
     Task<T> UpdateAsync(T entity);
     Task<T> DeleteAsync(T entity);

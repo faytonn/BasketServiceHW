@@ -1,5 +1,7 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.Services.Implementations;
+using Allup.Application.UI.Services.Abstracts;
+using Allup.Application.UI.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +33,8 @@ public static class ApplicationServiceRegistration
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddScoped<ILanguageService, LanguageManager>();
+        services.AddScoped<ICategoryService, CategoryManager>();
+        services.AddScoped<IHomeService, HomeManager>();
 
         services.AddSingleton<StringLocalizerService>();
 
