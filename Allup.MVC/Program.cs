@@ -2,6 +2,8 @@ using Allup.Domain.Entities;
 using Allup.Persistence;
 using Allup.Persistence.Context;
 using Microsoft.AspNetCore.Identity;
+using Allup.Application;
+using Microsoft.Extensions.Options;
 
 namespace Allup.MVC
 {
@@ -11,7 +13,8 @@ namespace Allup.MVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+            builder.Services.AddMvc().AddViewLocalization();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
             {
@@ -22,6 +25,7 @@ namespace Allup.MVC
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             builder.Services.AddPersistenceServices(builder.Configuration);
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
@@ -47,6 +51,10 @@ namespace Allup.MVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+
+            app.UseRequestLocalization(locOptions!.Value);
 
             app.UseRouting();
 

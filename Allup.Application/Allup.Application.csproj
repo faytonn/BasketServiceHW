@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Allup.Persistence\Allup.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.11" />
+  </ItemGroup>
+
 </Project>

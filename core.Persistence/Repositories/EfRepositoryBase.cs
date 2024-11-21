@@ -78,4 +78,9 @@ public class EfRepositoryBase<TEntity, TContext> : IRepositoryAsync<TEntity>
 
         return entityEntry.Entity;
     }
+
+    public async Task<List<TEntity>> GetAllAsync()
+    {
+        return await Context.Set<TEntity>().ToListAsync();
+    }
 }
