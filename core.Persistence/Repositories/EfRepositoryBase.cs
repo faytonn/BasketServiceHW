@@ -92,6 +92,8 @@ public class EfRepositoryBase<TEntity, TContext> : IRepositoryAsync<TEntity>
 
         if (orderBy != null) queryable = orderBy(queryable);
 
+        queryable = queryable.AsNoTracking();
+
         return await queryable.ToListAsync();
     }
 }

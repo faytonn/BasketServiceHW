@@ -19,7 +19,9 @@ public class LanguageManager : ILanguageService
         _mapper = mapper;
     }
 
-    public async Task<List<LanguageViewModel>> GetAllAsync(Expression<Func<Category, bool>>? predicate = null, Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderBy = null, Func<IQueryable<Category>, IIncludableQueryable<Category, object>>? include = null)
+    public async Task<List<LanguageViewModel>> GetAllAsync(Expression<Func<Language, bool>>? predicate = null,
+        Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderBy = null,
+        Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
     {
         var languages = await _languageRepository.GetAllAsync();
         var languagesViewModels = _mapper.Map<List<LanguageViewModel>>(languages);
@@ -27,7 +29,7 @@ public class LanguageManager : ILanguageService
         return languagesViewModels;
     }
 
-    public Task<LanguageViewModel> GetAsync(int id)
+    public Task<LanguageViewModel> GetAsync(int id, int languageId, Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
     {
         throw new NotImplementedException();
     }

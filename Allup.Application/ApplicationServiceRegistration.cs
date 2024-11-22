@@ -34,6 +34,7 @@ public static class ApplicationServiceRegistration
 
         services.AddScoped<ILanguageService, LanguageManager>();
         services.AddScoped<ICategoryService, CategoryManager>();
+        services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IHomeService, HomeManager>();
 
         services.AddSingleton<StringLocalizerService>();

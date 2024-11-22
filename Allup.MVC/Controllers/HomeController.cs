@@ -16,7 +16,7 @@ namespace Allup.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-           var languageId = await GetLanguageAsync();
+            var languageId = await GetLanguageAsync();
 
             var homeViewModel = await _homeService.GetHomeViewModelAsync(languageId);
 

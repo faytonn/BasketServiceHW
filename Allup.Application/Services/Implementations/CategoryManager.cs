@@ -29,7 +29,7 @@ namespace Allup.Application.Services.Implementations
             return categoryViewModels;
         }
 
-        public Task<CategoryViewModel> GetAsync(int id)
+        public Task<CategoryViewModel> GetAsync(int id, int languageId, Func<IQueryable<Category>, IIncludableQueryable<Category, object>>? include = null)
         {
             throw new NotImplementedException();
         }

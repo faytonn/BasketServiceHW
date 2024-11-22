@@ -1,0 +1,61 @@
+﻿using Allup.Application.Services.Abstracts;
+using Allup.Application.UI.ViewModels;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
+namespace Allup.MVC.ViewComponenets
+{
+    public class BasketViewComponent :  ViewComponent
+    {
+        private readonly IProductService _productService;
+        private readonly ILanguageService _languageService;
+
+        public BasketViewComponent(IProductService productService, ILanguageService languageService)
+        {
+            _productService = productService;
+            _languageService = languageService;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var basket = Request.Cookies["basket"];
+            var basketViewModel = new BasketViewModel();
+            var basketItemViewModels = new List<BasketItemViewModel>();
+
+            if (string.IsNullOrEmpty(basket))
+            {
+                return View(basketViewModel);
+            }
+
+            var basketCookieViewModels = JsonConvert.DeserializeObject<List<BasketCookieViewModel>>(basket);
+
+
+            var culture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
+            var isoCode = culture?.Substring(culture.LastIndexOf("=") + 1) ?? "en-Us";
+            var selectedLanguage = await _languageService.GetLanguageAsync(isoCode);
+
+            foreach (var item in basketCookieViewModels ?? [])
+            {
+                var existBasketItem = await _productService.GetAsync(item.ProductId, selectedLanguage.Id);
+
+                if (existBasketItem == null) continue;
+
+                basketItemViewModels.Add(new BasketItemViewModel
+                {
+                    ProductId = existBasketItem.Id,
+                    Name = existBasketItem.Name,
+                    Price = existBasketItem.Price,
+                    CoverImageUrl = existBasketItem?.CoverImageUrl,
+                    Count = item.Count
+                });
+            }
+
+            basketViewModel.Items = basketItemViewModels;
+
+            return View(basketViewModel);
+        }
+    }
+}

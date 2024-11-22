@@ -9,6 +9,7 @@ namespace Allup.Domain.Entities
         public Category? Parent { get; set; }
         public List<Category>? SubCategories { get; set; }
         public List<CategoryTranslation>? CategoryTranslations { get; set; }
+        public List<Product>? Products { get; set; }
     }
 
     public class CategoryTranslation : Entity

@@ -11,9 +11,9 @@ namespace Allup.Application.Services.Abstracts
 {
     public interface ICrudService<TViewModel, TEntity> 
     {
-        Task<TViewModel> GetAsync(int id);
-        Task<List<TViewModel>> GetAllAsync(Expression<Func<Category, bool>>? predicate = null,
-        Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderBy = null,
-                                    Func<IQueryable<Category>, IIncludableQueryable<Category, object>>? include = null);
+        Task<TViewModel> GetAsync(int id, int languageId, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
+        Task<List<TViewModel>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null,
+                                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                    Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
     }
 }

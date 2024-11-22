@@ -3,6 +3,6 @@ using Core.Persistence.Repositories;
 
 namespace Allup.Persistence.Repositories.Abstraction;
 
-public interface ICategoryRepository : IRepositoryAsync<Category>
+public interface IProductRepository : IRepositoryAsync<Product>
 {
 }
