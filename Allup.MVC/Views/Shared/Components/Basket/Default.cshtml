@@ -1,8 +1,8 @@
 ﻿@model BasketViewModel
 
 <div class="mini-cart">
-    <ul class="cart-items">
-        @foreach(var item in Model.Items??[])
+    <ul class="cart-items" id="basketItems">
+        @foreach (var item in Model.Items ?? [])
         {
             <li>
                 <div class="single-cart-item d-flex">
@@ -14,16 +14,16 @@
                         <h5 class="product-name"><a href="single-product.html">@item.Name</a></h5>
                         <span class="product-price">€@item.Price</span>
                         <span class="product-color"><strong>Color:</strong> White</span>
-                        <a href="#" class="product-close"><i class="fal fa-times"></i></a>
+                        <a onclick="removeFromBasket(@item.ProductId)" class="product-close"><i class="fal fa-times"></i></a>
                     </div>
                 </div>
             </li>
         }
     </ul>
-    @if(Model.Items?.Count != 0)
+    @if (Model.Items?.Count != 0)
     {
         <div class="price_content">
-            <div class="cart-subtotals">
+            @*             <div class="cart-subtotals">
                 <div class="products price_inline">
                     <span class="label">Subtotal</span>
                     <span class="value">€30.80</span>
@@ -36,10 +36,10 @@
                     <span class="label">Taxes</span>
                     <span class="value">€0.00</span>
                 </div>
-            </div>
+            </div> *@
             <div class="cart-total price_inline">
                 <span class="label">Total</span>
-                <span class="value">€37.80</span>
+                <span class="value" id="basketTotalAmount">€@Model.TotalAmount</span>
             </div>
         </div> <!-- price content -->
         <div class="checkout text-center">
@@ -48,3 +48,10 @@
     }
 
 </div> <!-- mini cart -->
+
+
+<script>
+
+    const output=document.getElementById("basketItemCount")
+    output.innerHTML=@Model.Count
+</script>

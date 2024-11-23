@@ -131,7 +131,8 @@
                                             <img class="second-image" src="assets/images/product/@firstProduct.HoverImageUrl" alt="product">
                                         </a>
                                         <ul class="product-meta">
-                                            <li><a asp-controller="basket" asp-action="addbasket" asp-route-productId="@firstProduct.Id"><i class="icon ion-bag"></i></a></li>
+                                            <li><a onclick="addToBasket(@firstProduct.Id)"><i class="icon ion-bag"></i></a></li>
+                                            @* <li><a class="addToBasketButton" asp-action="addBasket" asp-controller="basket" asp-route-productId="@firstProduct.Id"><i class="icon ion-bag"></i></a></li> *@
                                             <li><a href="#"><i class="icon ion-android-favorite-outline"></i></a></li>
                                             <li><a href="#"><i class="icon ion-android-options"></i></a></li>
                                             <li><a data-toggle="modal" data-target="#productQuickModal" href="#"><i class="icon ion-android-open"></i></a></li>
@@ -157,7 +158,7 @@
                                             <img class="second-image" src="assets/images/product/@secondProduct.HoverImageUrl" alt="product">
                                         </a>
                                         <ul class="product-meta">
-                                            <li><a asp-controller="basket" asp-action="addbasket" asp-route-productId="@secondProduct.Id"><i class="icon ion-bag"></i></a></li>
+                                            <li><a onclick="addToBasket(@secondProduct.Id)"><i class="icon ion-bag"></i></a></li>
                                             <li><a href="#"><i class="icon ion-android-favorite-outline"></i></a></li>
                                             <li><a href="#"><i class="icon ion-android-options"></i></a></li>
                                             <li><a data-toggle="modal" data-target="#productQuickModal" href="#"><i class="icon ion-android-open"></i></a></li>

@@ -53,8 +53,11 @@ namespace Allup.MVC.ViewComponenets
                 });
             }
 
-            basketViewModel.Items = basketItemViewModels;
+            //var totalAmount = basketItemViewModels.Sum(x => x.Price * x.Count);
 
+            basketViewModel.Items = basketItemViewModels;
+            //basketViewModel.TotalAmount = totalAmount;
+            TempData["Count"] = basketViewModel.Count;
             return View(basketViewModel);
         }
     }

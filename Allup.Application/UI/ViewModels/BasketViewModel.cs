@@ -15,7 +15,8 @@ namespace Allup.Application.UI.ViewModels
     public class BasketViewModel
     {
         public List<BasketItemViewModel>? Items { get; set; } = [];
-        public decimal TotalAmount {  get; set; }
+        public int Count => Items.Sum(x => x.Count);
+        public decimal TotalAmount => Items.Sum(x => x.Price * x.Count);
     }
 
     public class BasketItemViewModel
