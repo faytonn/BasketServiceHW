@@ -36,6 +36,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IHomeService, HomeManager>();
+        services.AddScoped<ICompareService, CompareManager>();
 
         services.AddSingleton<StringLocalizerService>();
 

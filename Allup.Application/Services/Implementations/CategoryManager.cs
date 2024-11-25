@@ -33,5 +33,10 @@ namespace Allup.Application.Services.Implementations
         {
             throw new NotImplementedException();
         }
+
+        public Task<CategoryViewModel> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

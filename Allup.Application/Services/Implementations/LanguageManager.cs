@@ -34,6 +34,11 @@ public class LanguageManager : ILanguageService
         throw new NotImplementedException();
     }
 
+    public Task<LanguageViewModel> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<LanguageViewModel> GetLanguageAsync(string isoCode)
     {
         var languages = await _languageRepository.GetAllAsync();

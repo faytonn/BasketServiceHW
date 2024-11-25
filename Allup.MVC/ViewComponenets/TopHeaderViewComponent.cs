@@ -9,10 +9,12 @@ namespace Allup.MVC.ViewComponenets
     public class TopHeaderViewComponent : ViewComponent
     {
         private readonly ILanguageService _languageService;
+        private readonly ICompareService _compareService;
 
-        public TopHeaderViewComponent(ILanguageService languageService)
+        public TopHeaderViewComponent(ILanguageService languageService, ICompareService compareService)
         {
             _languageService = languageService;
+            _compareService = compareService;
         }
 
         public async Task<ViewViewComponentResult> InvokeAsync()
@@ -21,11 +23,13 @@ namespace Allup.MVC.ViewComponenets
             var culture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
             var isoCode = culture?.Substring(culture.LastIndexOf("=") + 1) ?? "en-Us";
             var selectedLanguage = await _languageService.GetLanguageAsync(isoCode);
+            var compareItemCount = _compareService.GetCount();
 
             var topHeaderViewModel = new TopHeaderViewModel
             {
                 Languages = languages,
-                SelectedLanguage = selectedLanguage
+                SelectedLanguage = selectedLanguage,
+                CompareItemCount = compareItemCount
             };
 
             return View(topHeaderViewModel);

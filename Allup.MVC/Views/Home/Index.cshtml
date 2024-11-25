@@ -3,7 +3,7 @@
     var categories = model.Categories;
     var products = model.Products;
 } 
-<!--====== Slider Part Start ======-->
+@* <!--====== Slider Part Start ======-->
 
 <section class="slider-area slider-active">
     <div class="single-slider">
@@ -58,7 +58,7 @@
     </div> <!-- container -->
 </div>
 
-<!--====== Banner Part Ends ======-->
+<!--====== Banner Part Ends ======--> *@
 <!--====== Category Part Start ======-->
 
 <section class="category-area category-bg pt-100 pb-100">
@@ -134,7 +134,7 @@
                                             <li><a onclick="addToBasket(@firstProduct.Id)"><i class="icon ion-bag"></i></a></li>
                                             @* <li><a class="addToBasketButton" asp-action="addBasket" asp-controller="basket" asp-route-productId="@firstProduct.Id"><i class="icon ion-bag"></i></a></li> *@
                                             <li><a href="#"><i class="icon ion-android-favorite-outline"></i></a></li>
-                                            <li><a href="#"><i class="icon ion-android-options"></i></a></li>
+                                            <li><a onclick="addToCompare(@firstProduct.Id)"><i class="icon ion-android-options"></i></a></li>
                                             <li><a data-toggle="modal" data-target="#productQuickModal" href="#"><i class="icon ion-android-open"></i></a></li>
                                         </ul>
                                     </div>
@@ -160,7 +160,7 @@
                                         <ul class="product-meta">
                                             <li><a onclick="addToBasket(@secondProduct.Id)"><i class="icon ion-bag"></i></a></li>
                                             <li><a href="#"><i class="icon ion-android-favorite-outline"></i></a></li>
-                                            <li><a href="#"><i class="icon ion-android-options"></i></a></li>
+                                            <li><a onclick="addToCompare(@secondProduct.Id)"><i class="icon ion-android-options"></i></a></li>
                                             <li><a data-toggle="modal" data-target="#productQuickModal" href="#"><i class="icon ion-android-open"></i></a></li>
                                         </ul>
                                     </div>

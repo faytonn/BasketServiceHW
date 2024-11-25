@@ -38,4 +38,12 @@ public class ProductManager : IProductService
 
         return productViewModel;
     }
+
+    public async Task<ProductViewModel> GetByIdAsync(int id)
+    {
+        var product = await _repository.GetAsync(id);
+        var productViewModel = _mapper.Map<ProductViewModel>(product);
+
+        return productViewModel;
+    }
 }

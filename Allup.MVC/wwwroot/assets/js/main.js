@@ -1,4 +1,33 @@
 
+
+function addToCompare(productId) {
+
+    let compareItemCount = $("#compareItemCount");
+    $.ajax({
+        type: 'POST',
+        url: `/compare/AddToCompareList?productId=${productId}`,
+        success: function (data) {
+            compareItemCount.text(` (${data.count})`);
+        }
+    });
+}
+
+function removeFromCompare(productId) {
+
+    let compareTable = $("#compareTableDiv");
+    let compareItemCount = $("#compareItemCount");
+
+    $.ajax({
+        type: 'POST',
+        url: `/compare/RemoveFromCompareList?productId=${productId}`,
+        success: function (data) {
+            compareTable.empty();
+            compareTable.append(data);
+        }
+    });
+}
+
+
 function addToBasket(productId) {
 
     let basketItems = $("#basketItems");
