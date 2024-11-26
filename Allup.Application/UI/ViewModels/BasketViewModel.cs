@@ -25,6 +25,7 @@ namespace Allup.Application.UI.ViewModels
         public string? Name { get; set; }
         public string? CoverImageUrl { get; set; }
         public decimal Price { get; set; }
+        public string? FormattedPrice {  get; set; }
         public int Count { get; set; }
     }
 }

@@ -8,6 +8,7 @@ public class ProductViewModel
     public string? CoverImageUrl { get; set; }
     public string? HoverImageUrl { get; set; }
     public decimal Price { get; set; }
+    public string? FormattedPrice { get; set; }
     public double Discount { get; set; }
     public double Rate { get; set; }
     public int Count { get; set; }

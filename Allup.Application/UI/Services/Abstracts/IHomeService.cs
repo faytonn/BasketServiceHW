@@ -4,5 +4,5 @@ namespace Allup.Application.UI.Services.Abstracts;
 
 public interface IHomeService
 {
-    Task<HomeViewModel> GetHomeViewModelAsync(int languageId);
+    Task<HomeViewModel> GetHomeViewModelAsync();
 }

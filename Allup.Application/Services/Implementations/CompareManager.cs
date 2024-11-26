@@ -1,6 +1,7 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
+using Allup.Persistence.Repositories.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

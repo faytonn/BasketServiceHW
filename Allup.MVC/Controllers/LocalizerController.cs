@@ -1,6 +1,7 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Allup.MVC.Controllers
 {
@@ -20,6 +21,21 @@ namespace Allup.MVC.Controllers
                 new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
 
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        public IActionResult ChangeCurrency(string code)
+        {
+            Response.Cookies.Append("currency",code,
+               new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        public string GetCurrencyCode()
+        {
+            var culture = Request.Cookies["currency"];
+
+            return culture ?? "azn";
         }
 
         public async Task<int> GetLanguageAsync()

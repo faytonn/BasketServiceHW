@@ -4,6 +4,7 @@ using Allup.Persistence.Context;
 using Microsoft.AspNetCore.Identity;
 using Allup.Application;
 using Microsoft.Extensions.Options;
+using Allup.Application.UI.Services.Implementations;
 
 namespace Allup.MVC
 {
@@ -24,6 +25,7 @@ namespace Allup.MVC
                 options.Password.RequiredLength = 4;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+            builder.Services.AddHttpClient<ExternalApiService>();
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
 

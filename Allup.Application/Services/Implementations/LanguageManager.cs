@@ -3,6 +3,7 @@ using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
 using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
+using Core.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
@@ -20,8 +21,8 @@ public class LanguageManager : ILanguageService
     }
 
     public async Task<List<LanguageViewModel>> GetAllAsync(Expression<Func<Language, bool>>? predicate = null,
-        Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderBy = null,
-        Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
+    Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderBy = null,
+                                    Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
     {
         var languages = await _languageRepository.GetAllAsync();
         var languagesViewModels = _mapper.Map<List<LanguageViewModel>>(languages);

@@ -16,10 +16,10 @@ public class HomeManager : IHomeService
         _productService = productService;
     }
 
-    public async Task<HomeViewModel> GetHomeViewModelAsync(int languageId)
+    public async Task<HomeViewModel> GetHomeViewModelAsync()
     {
-        var categories = await _categoryService.GetAllAsync(include: x => x.Include(y => y.CategoryTranslations!.Where(ct => ct.LanguageId == languageId)));
-        var products = await _productService.GetAllAsync(include: x => x.Include(y => y.ProductTranslations!.Where(ct => ct.LanguageId == languageId)));
+        var categories = await _categoryService.GetAllAsync();
+        var products = await _productService.GetAllAsync();
 
         var homeViewModel = new HomeViewModel
         {

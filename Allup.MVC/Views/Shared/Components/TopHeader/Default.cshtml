@@ -22,11 +22,13 @@
                     </li>
                     <li>
                         <div class="dropdown">
-                            <button type="button" id="currency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD $ <i class="icon ion-chevron-down"></i></button>
+                            <button type="button" id="currency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.SelectedCurrency?.Name <i class="icon ion-chevron-down"></i></button>
 
                             <ul class="dropdown-menu" aria-labelledby="currency">
-                                <li><a href="#">EUR €</a></li>
-                                <li><a href="#">USD $</a></li>
+                                @foreach (var item in Model.Currencies ?? [])
+                                {
+                                    <li><a asp-controller="localizer" asp-action="changecurrency" asp-route-code="@item.IsoCode">@item.Name</a></li>
+                                }
                             </ul>
                         </div>
                     </li>

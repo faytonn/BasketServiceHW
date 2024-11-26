@@ -19,6 +19,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ILanguageRepository, LanguageRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICurrencyRepository, CurrencyRepository>();
         services.AddScoped<DataInitializer>();
 
         return services;

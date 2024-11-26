@@ -49,6 +49,7 @@ namespace Allup.MVC.ViewComponenets
                     Name = existBasketItem.Name,
                     Price = existBasketItem.Price,
                     CoverImageUrl = existBasketItem?.CoverImageUrl,
+                    FormattedPrice = existBasketItem?.FormattedPrice,
                     Count = item.Count
                 });
             }

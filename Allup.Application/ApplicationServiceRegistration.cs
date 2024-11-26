@@ -33,10 +33,12 @@ public static class ApplicationServiceRegistration
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddScoped<ILanguageService, LanguageManager>();
+        services.AddScoped<ICurrencyService, CurrencyManager>();
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IHomeService, HomeManager>();
         services.AddScoped<ICompareService, CompareManager>();
+        services.AddScoped<ICookieService, CookieManager>();
 
         services.AddSingleton<StringLocalizerService>();
 
