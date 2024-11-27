@@ -1,6 +1,7 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
+using Allup.Persistence.Context;
 using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
 using Core.Persistence.Repositories;
@@ -12,9 +13,9 @@ namespace Allup.Application.Services.Implementations;
 
 public class LanguageManager : CrudManager<LanguageViewModel, Language>,  ILanguageService
 {
-    private readonly IRepositoryAsync<Language> _languageRepository;
+    private readonly EfRepositoryBase<Language,  AppDbContext> _languageRepository;
 
-    public LanguageManager(IRepositoryAsync<Language> languageRepository, IMapper mapper) : base(languageRepository, mapper)
+    public LanguageManager(EfRepositoryBase<Language, AppDbContext> languageRepository, IMapper mapper) : base(languageRepository, mapper)
     {
         _languageRepository = languageRepository;
     }

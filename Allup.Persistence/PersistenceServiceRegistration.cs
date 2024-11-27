@@ -17,7 +17,7 @@ public static class PersistenceServiceRegistration
             options.UseSqlServer(configuration.GetConnectionString("AllupDbConnection"));
         });
 
-        services.AddScoped(typeof(IRepositoryAsync<>),  typeof(EfRepositoryBase<,>));
+        services.AddScoped(typeof(EfRepositoryBase<,>));
         services.AddScoped<ILanguageRepository, LanguageRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();

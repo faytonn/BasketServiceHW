@@ -1,6 +1,7 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
+using Allup.Persistence.Context;
 using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
 using Core.Persistence.Repositories;
@@ -12,9 +13,9 @@ namespace Allup.Application.Services.Implementations;
 
 public class CurrencyManager : CrudManager<CurrencyViewModel, Currency>,  ICurrencyService
 {
-    private readonly IRepositoryAsync<Currency> _currencyRepository;
+    private readonly EfRepositoryBase<Currency, AppDbContext> _currencyRepository;
 
-    public CurrencyManager(IRepositoryAsync<Currency> currencyRepository, IMapper mapper) : base(currencyRepository, mapper)
+    public CurrencyManager(EfRepositoryBase<Currency, AppDbContext> currencyRepository, IMapper mapper) : base(currencyRepository, mapper)
     {
         _currencyRepository = currencyRepository;
     }

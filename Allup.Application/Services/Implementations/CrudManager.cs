@@ -1,5 +1,6 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.ViewModels;
+using Allup.Persistence.Context;
 using AutoMapper;
 using Core.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore.Query;
@@ -14,10 +15,10 @@ namespace Allup.Application.Services.Implementations
 {
     public class CrudManager<TViewModel, TEntity> : ICrudService<TViewModel, TEntity> where TEntity: Entity
     {
-        private readonly IRepositoryAsync<TEntity> _repository;
+        private readonly EfRepositoryBase<TEntity,AppDbContext> _repository;
         protected IMapper Mapper;
 
-        public CrudManager(IRepositoryAsync<TEntity> repository, IMapper mapper)
+        public CrudManager(EfRepositoryBase<TEntity, AppDbContext> repository, IMapper mapper)
         {
             _repository = repository;
             Mapper = mapper;

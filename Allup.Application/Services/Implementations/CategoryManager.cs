@@ -2,6 +2,7 @@
 using Allup.Application.UI.Services.Abstracts;
 using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
+using Allup.Persistence.Context;
 using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
 using Core.Persistence.Repositories;
@@ -12,9 +13,9 @@ namespace Allup.Application.Services.Implementations
 {
     public class CategoryManager : CrudManager<CategoryViewModel, Category>, ICategoryService
     {
-        private readonly IRepositoryAsync<Category> _repository;
+        private readonly EfRepositoryBase<Category, AppDbContext> _repository;
 
-        public CategoryManager(IRepositoryAsync<Category> repository, IMapper mapper) : base(repository, mapper)
+        public CategoryManager(EfRepositoryBase<Category, AppDbContext> repository, IMapper mapper) : base(repository, mapper)
         {
             _repository = repository;
         }

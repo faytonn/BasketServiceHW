@@ -3,6 +3,7 @@ using Allup.Application.UI.Services.Abstracts;
 using Allup.Application.UI.Services.Implementations;
 using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
+using Allup.Persistence.Context;
 using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
 using Core.Persistence.Repositories;
@@ -16,12 +17,12 @@ namespace Allup.Application.Services.Implementations;
 
 public class ProductManager :  CrudManager<ProductViewModel, Product>, IProductService
 {
-    private readonly IRepositoryAsync<Product> _repository;
+    private readonly EfRepositoryBase<Product, AppDbContext> _repository;
     private readonly ExternalApiService _externalApiService;
     private readonly ICurrencyService _currencyService;
     private readonly ICookieService _cookieService;
 
-    public ProductManager(IRepositoryAsync<Product> repository, IMapper mapper, ExternalApiService externalApiService, ICurrencyService currencyService, ICookieService cookieService) : base(repository, mapper)
+    public ProductManager(EfRepositoryBase<Product, AppDbContext> repository, IMapper mapper, ExternalApiService externalApiService, ICurrencyService currencyService, ICookieService cookieService) : base(repository, mapper)
     {
         _repository = repository;
         _externalApiService = externalApiService;
