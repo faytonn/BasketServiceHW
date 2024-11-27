@@ -42,7 +42,7 @@ namespace Allup.MVC.Controllers
         {
             var culture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
             var isoCode = culture?.Substring(culture.LastIndexOf("=") + 1) ?? "en-Us";
-            var selectedLanguage = await _languageService.GetLanguageAsync(isoCode);
+            var selectedLanguage = await _languageService.GetAsync(x => x.IsoCode == isoCode);
 
             return selectedLanguage.Id;
         }

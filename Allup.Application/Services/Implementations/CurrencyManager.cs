@@ -5,47 +5,45 @@ using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
 using Core.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations;
 
-public class CurrencyManager : ICurrencyService
+public class CurrencyManager : CrudManager<CurrencyViewModel, Currency>,  ICurrencyService
 {
-    private readonly ICurrencyRepository _currencyRepository;
-    private readonly IMapper _mapper;
+    private readonly IRepositoryAsync<Currency> _currencyRepository;
 
-    public CurrencyManager(ICurrencyRepository currencyRepository, IMapper mapper)
+    public CurrencyManager(IRepositoryAsync<Currency> currencyRepository, IMapper mapper) : base(currencyRepository, mapper)
     {
         _currencyRepository = currencyRepository;
-        _mapper = mapper;
     }
 
-    public async Task<List<CurrencyViewModel>> GetAllAsync(Expression<Func<Currency, bool>>? predicate = null,
-    Func<IQueryable<Currency>, IOrderedQueryable<Currency>>? orderBy = null,
-                                    Func<IQueryable<Currency>, IIncludableQueryable<Currency, object>>? include = null)
-    {
-        var currencies = await _currencyRepository.GetAllAsync();
-        var currencyViewModels = _mapper.Map<List<CurrencyViewModel>>(currencies);
+    //public async Task<List<CurrencyViewModel>> GetAllAsync(Expression<Func<Currency, bool>>? predicate = null,
+    //Func<IQueryable<Currency>, IOrderedQueryable<Currency>>? orderBy = null,
+    //                                Func<IQueryable<Currency>, IIncludableQueryable<Currency, object>>? include = null)
+    //{
+    //    var currencies = await _currencyRepository.GetAllAsync();
+    //    var currencyViewModels = _mapper.Map<List<CurrencyViewModel>>(currencies);
 
-        return currencyViewModels;
-    }
+    //    return currencyViewModels;
+    //}
 
-    public Task<CurrencyViewModel> GetAsync(int id, int CurrencyId, Func<IQueryable<Currency>, IIncludableQueryable<Currency, object>>? include = null)
-    {
-        throw new NotImplementedException();
-    }
+    //public async Task<CurrencyViewModel> GetAsync(Expression<Func<Currency, bool>> predicate, Func<IQueryable<Currency>, IIncludableQueryable<Currency, object>>? include = null)
+    //{
+    //    var currency = await _currencyRepository.GetAsync(predicate, include);
 
-    public Task<CurrencyViewModel> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
+    //    var currencyViewModel = _mapper.Map<CurrencyViewModel>(currency);
 
-    public async Task<CurrencyViewModel> GetCurrencyAsync(string isoCode)
-    {
-        var currencies = await _currencyRepository.GetAllAsync();
+    //    return currencyViewModel;
+    //}
 
-        var currency = currencies.FirstOrDefault(x => x.IsoCode.ToLower() == isoCode.ToLower());
+    //public async Task<CurrencyViewModel> GetAsync(int id)
+    //{
+    //    var currency = await _currencyRepository.GetAsync(id);
 
-        return _mapper.Map<CurrencyViewModel>(currency);
-    }
+    //    var currencyViewModel = _mapper.Map<CurrencyViewModel>(currency);
+
+    //    return currencyViewModel;
+    //}
 }

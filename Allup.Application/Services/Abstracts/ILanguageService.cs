@@ -5,5 +5,4 @@ namespace Allup.Application.Services.Abstracts;
 
 public interface ILanguageService : ICrudService<LanguageViewModel, Language>
 {
-    Task<LanguageViewModel> GetLanguageAsync(string isoCode);
 }

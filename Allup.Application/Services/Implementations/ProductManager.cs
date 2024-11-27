@@ -14,32 +14,28 @@ using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations;
 
-public class ProductManager : IProductService
+public class ProductManager :  CrudManager<ProductViewModel, Product>, IProductService
 {
-    private readonly IProductRepository _repository;
-    private readonly IMapper _mapper;
+    private readonly IRepositoryAsync<Product> _repository;
     private readonly ExternalApiService _externalApiService;
     private readonly ICurrencyService _currencyService;
     private readonly ICookieService _cookieService;
 
-    public ProductManager(IProductRepository repository, IMapper mapper, ExternalApiService externalApiService, ICurrencyService currencyService, ICookieService cookieService)
+    public ProductManager(IRepositoryAsync<Product> repository, IMapper mapper, ExternalApiService externalApiService, ICurrencyService currencyService, ICookieService cookieService) : base(repository, mapper)
     {
         _repository = repository;
-        _mapper = mapper;
         _externalApiService = externalApiService;
         _currencyService = currencyService;
         _cookieService = cookieService;
     }
 
-    public async Task<List<ProductViewModel>> GetAllAsync(Expression<Func<Product, bool>>? predicate = null,
+    public override async Task<List<ProductViewModel>> GetAllAsync(Expression<Func<Product, bool>>? predicate = null,
                                     Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null,
                                     Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null)
     {
-        var language = await _cookieService.GetLanguageAsync();
-        var products = await _repository.GetAllAsync(include: x => x
-                         .Include(y => y.ProductTranslations!.Where(z => z.LanguageId == language.Id)));
+        var products = await _repository.GetAllAsync(predicate, orderBy, include);
 
-        var productViewModels = _mapper.Map<List<ProductViewModel>>(products);
+        var productViewModels = Mapper.Map<List<ProductViewModel>>(products);
 
         var currency = await _cookieService.GetCurrencyAsync();
 
@@ -54,11 +50,11 @@ public class ProductManager : IProductService
         return productViewModels;
     }
 
-    public async Task<ProductViewModel> GetAsync(int id, int languageId, Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null)
+    public override async Task<ProductViewModel> GetAsync(Expression<Func<Product, bool>> predicate, Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null)
     {
-        var product = await _repository.GetAsync(x => x.Id == id, include: x => x.Include(y => y.ProductTranslations!.Where(pt => pt.LanguageId == languageId)));
+        var product = await _repository.GetAsync(predicate, include);
         
-        var productViewModel = _mapper.Map<ProductViewModel>(product);
+        var productViewModel = Mapper.Map<ProductViewModel>(product);
 
         var currency = await _cookieService.GetCurrencyAsync();
 
@@ -70,11 +66,11 @@ public class ProductManager : IProductService
         return productViewModel;
     }
 
-    public async Task<ProductViewModel> GetByIdAsync(int id)
-    {
-        var product = await _repository.GetAsync(id);
-        var productViewModel = _mapper.Map<ProductViewModel>(product);
+    //public async Task<ProductViewModel> GetAsync(int id)
+    //{
+    //    var product = await _repository.GetAsync(id);
+    //    var productViewModel = _mapper.Map<ProductViewModel>(product);
 
-        return productViewModel;
-    }
+    //    return productViewModel;
+    //}
 }

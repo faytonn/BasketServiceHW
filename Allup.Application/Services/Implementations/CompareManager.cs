@@ -24,7 +24,7 @@ namespace Allup.Application.Services.Implementations
         {
             var compareListAsJson = _contextAccessor.HttpContext.Request.Cookies[COMPARE_COOKIE_KEY];
             var compareItems = new List<int>();
-            var existProduct = await _productService.GetByIdAsync(productId);
+            var existProduct = await _productService.GetAsync(productId);
 
             if (compareListAsJson == null)
             {

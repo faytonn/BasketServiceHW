@@ -2,6 +2,7 @@
 using Allup.Application.UI.ViewModels;
 using Allup.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Allup.MVC.Controllers
@@ -60,7 +61,8 @@ namespace Allup.MVC.Controllers
 
             foreach (var item in basketCookieViewModels ?? [])
             {
-                var existBasketItem = await _productService.GetAsync(item.ProductId, languageId);
+                var existBasketItem = await _productService.GetAsync(x => x.Id == item.ProductId,
+                    x => x.Include(y => y.ProductTranslations!.Where(z => z.LanguageId == languageId)));
 
                 if (existBasketItem == null) continue;
 
@@ -106,7 +108,8 @@ namespace Allup.MVC.Controllers
 
             foreach (var item in basketCookieViewModels ?? [])
             {
-                var existBasketItem = await _productService.GetAsync(item.ProductId, languageId);
+                var existBasketItem = await _productService.GetAsync(x => x.Id == item.ProductId,
+                    x => x.Include(y => y.ProductTranslations!.Where(z => z.LanguageId == languageId)));
 
                 if (existBasketItem == null) continue;
 

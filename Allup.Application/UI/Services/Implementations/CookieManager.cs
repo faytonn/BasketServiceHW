@@ -24,7 +24,7 @@ public class CookieManager : ICookieService
     {
         var currencies = await _currencyService.GetAllAsync();
         var currencyIsoCode = _contextAccessor.HttpContext.Request.Cookies["currency"] ?? "az-az";
-        var selectedCurrency = await _currencyService.GetCurrencyAsync(currencyIsoCode);
+        var selectedCurrency = await _currencyService.GetAsync(x => x.IsoCode == currencyIsoCode);
 
         return selectedCurrency;
     }
@@ -34,7 +34,7 @@ public class CookieManager : ICookieService
         var languages = await _languageService.GetAllAsync();
         var culture = _contextAccessor.HttpContext.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
         var isoCode = culture?.Substring(culture.LastIndexOf("=") + 1) ?? "en-Us";
-        var selectedLanguage = await _languageService.GetLanguageAsync(isoCode);
+        var selectedLanguage = await _languageService.GetAsync(x => x.IsoCode == isoCode);
 
         return selectedLanguage;
     }

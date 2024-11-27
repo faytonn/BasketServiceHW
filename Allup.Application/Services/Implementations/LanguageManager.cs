@@ -5,47 +5,45 @@ using Allup.Persistence.Repositories.Abstraction;
 using AutoMapper;
 using Core.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations;
 
-public class LanguageManager : ILanguageService
+public class LanguageManager : CrudManager<LanguageViewModel, Language>,  ILanguageService
 {
-    private readonly ILanguageRepository _languageRepository;
-    private readonly IMapper _mapper;
+    private readonly IRepositoryAsync<Language> _languageRepository;
 
-    public LanguageManager(ILanguageRepository languageRepository, IMapper mapper)
+    public LanguageManager(IRepositoryAsync<Language> languageRepository, IMapper mapper) : base(languageRepository, mapper)
     {
         _languageRepository = languageRepository;
-        _mapper = mapper;
     }
 
-    public async Task<List<LanguageViewModel>> GetAllAsync(Expression<Func<Language, bool>>? predicate = null,
-    Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderBy = null,
-                                    Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
-    {
-        var languages = await _languageRepository.GetAllAsync();
-        var languagesViewModels = _mapper.Map<List<LanguageViewModel>>(languages);
+    //public async Task<List<LanguageViewModel>> GetAllAsync(Expression<Func<Language, bool>>? predicate = null,
+    //Func<IQueryable<Language>, IOrderedQueryable<Language>>? orderBy = null,
+    //                                Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
+    //{
+    //    var languages = await _languageRepository.GetAllAsync();
+    //    var languagesViewModels = _mapper.Map<List<LanguageViewModel>>(languages);
 
-        return languagesViewModels;
-    }
+    //    return languagesViewModels;
+    //}
 
-    public Task<LanguageViewModel> GetAsync(int id, int languageId, Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
-    {
-        throw new NotImplementedException();
-    }
+    //public async Task<LanguageViewModel> GetAsync(Expression<Func<Language, bool>> predicate, Func<IQueryable<Language>, IIncludableQueryable<Language, object>>? include = null)
+    //{
+    //    var language = await _languageRepository.GetAsync(predicate, include);
 
-    public Task<LanguageViewModel> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
+    //    var languageViewModel = _mapper.Map<LanguageViewModel>(language);
 
-    public async Task<LanguageViewModel> GetLanguageAsync(string isoCode)
-    {
-        var languages = await _languageRepository.GetAllAsync();
+    //    return languageViewModel;
+    //}
 
-        var language = languages.FirstOrDefault(x => x.IsoCode.ToLower() == isoCode.ToLower());
+    //public async Task<LanguageViewModel> GetAsync(int id)
+    //{
+    //    var language = await _languageRepository.GetAsync(id);
 
-        return _mapper.Map<LanguageViewModel>(language);
-    }
+    //    var languageViewModel = _mapper.Map<LanguageViewModel>(language);
+
+    //    return languageViewModel;
+    //}
 }

@@ -3,6 +3,7 @@ using Allup.Application.UI.ViewModels;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
@@ -35,11 +36,12 @@ namespace Allup.MVC.ViewComponenets
 
             var culture = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
             var isoCode = culture?.Substring(culture.LastIndexOf("=") + 1) ?? "en-Us";
-            var selectedLanguage = await _languageService.GetLanguageAsync(isoCode);
+            var selectedLanguage = await _languageService.GetAsync(x => x.IsoCode == isoCode);
 
             foreach (var item in basketCookieViewModels ?? [])
             {
-                var existBasketItem = await _productService.GetAsync(item.ProductId, selectedLanguage.Id);
+                var existBasketItem = await _productService.GetAsync(x => x.Id == item.ProductId, 
+                    x => x.Include(y => y.ProductTranslations!.Where(z => z.LanguageId == selectedLanguage.Id)));
 
                 if (existBasketItem == null) continue;
 

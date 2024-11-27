@@ -37,6 +37,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IHomeService, HomeManager>();
+        services.AddScoped(typeof(ICrudService<,>), typeof(CrudManager<,>));
         services.AddScoped<ICompareService, CompareManager>();
         services.AddScoped<ICookieService, CookieManager>();
 
