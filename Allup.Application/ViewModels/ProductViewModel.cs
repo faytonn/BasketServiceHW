@@ -16,3 +16,5 @@ public class ProductViewModel
     public int SellCount { get; set; }
     public List<string>? Images { get; set; }
 }
+
+public class ProductCreateViewModel { }

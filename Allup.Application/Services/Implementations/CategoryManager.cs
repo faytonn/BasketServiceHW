@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations
 {
-    public class CategoryManager : CrudManager<CategoryViewModel, Category>, ICategoryService
+    public class CategoryManager : CrudManager<CategoryViewModel, Category, CategoryCreateViewModel>, ICategoryService
     {
         private readonly EfRepositoryBase<Category, AppDbContext> _repository;
 

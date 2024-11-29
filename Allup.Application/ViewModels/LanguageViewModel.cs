@@ -7,3 +7,8 @@ public class LanguageViewModel
     public string? IsoCode { get; set; }
     public string? ImageUrl {  get; set; }
 }
+
+public class LanguageCreateViewModel
+{
+
+}

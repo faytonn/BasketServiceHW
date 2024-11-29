@@ -3,7 +3,7 @@ using Allup.Domain.Entities;
 
 namespace Allup.Application.Services.Abstracts;
 
-public interface ICategoryService : ICrudService<CategoryViewModel, Category>
+public interface ICategoryService : ICrudService<CategoryViewModel, Category, CategoryCreateViewModel>
 {
 
 }

@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations;
 
-public class LanguageManager : CrudManager<LanguageViewModel, Language>,  ILanguageService
+public class LanguageManager : CrudManager<LanguageViewModel, Language, LanguageCreateViewModel>,  ILanguageService
 {
     private readonly EfRepositoryBase<Language,  AppDbContext> _languageRepository;
 

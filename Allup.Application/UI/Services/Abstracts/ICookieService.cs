@@ -6,4 +6,6 @@ public interface ICookieService
 {
     Task<LanguageViewModel> GetLanguageAsync();
     Task<CurrencyViewModel> GetCurrencyAsync();
+    void AddBrowserId();
+    string GetBrowserId();
 }

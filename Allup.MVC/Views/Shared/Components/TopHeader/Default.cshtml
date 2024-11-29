@@ -8,7 +8,7 @@
             <div class="header-menu-nav">
                 <ul class="menu-nav">
                     <li><a asp-controller="compare" asp-action="index"><i class="fal fa-repeat"></i> Compare<span id="compareItemCount">(@Model.CompareItemCount)</span>  </a></li>
-                    <li><a href="wishlist.html"><i class="fal fa-heart"></i> Wishlist(0)</a></li>
+                    <li><a asp-controller="wishlist" asp-action="index"><i class="fal fa-heart"></i> Wishlist<span id="wishlistItemCount">(@Model.WishlistItemCount)</span></a></li>
                     <li>
                         <div class="dropdown">
                             <button type="button" id="setting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setting <i class="icon ion-chevron-down"></i></button>

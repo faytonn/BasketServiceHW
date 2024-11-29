@@ -7,3 +7,8 @@ public class CurrencyViewModel
     public string? IsoCode { get; set; }
     public string? CurrencyCode { get; set; }
 }
+
+public class CurrencyCreateViewModel
+{
+
+}

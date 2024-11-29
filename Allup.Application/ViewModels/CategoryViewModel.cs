@@ -8,3 +8,7 @@ public class CategoryViewModel
     public int? ParentId { get; set; }
 }
 
+public class CategoryCreateViewModel
+{
+
+}

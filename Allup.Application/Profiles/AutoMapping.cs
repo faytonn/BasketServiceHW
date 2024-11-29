@@ -16,5 +16,7 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.ProductTranslations!.FirstOrDefault() == null ? "" : src.ProductTranslations!.FirstOrDefault()!.Description))
             .ReverseMap();
         CreateMap<CategoryTranslationViewModel, CategoryTranslation>().ReverseMap();
+        CreateMap<Wishlist, WishlistViewModel>().ReverseMap();
+        CreateMap<Wishlist, WishlistCreateViewModel>().ReverseMap();
     }
 }

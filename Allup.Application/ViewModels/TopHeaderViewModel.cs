@@ -7,4 +7,5 @@ public class TopHeaderViewModel
     public List<CurrencyViewModel>? Currencies { get; set; }
     public CurrencyViewModel? SelectedCurrency { get; set; }
     public int CompareItemCount {  get; set; }
+    public int WishlistItemCount {  get; set; }
 }

@@ -1,4 +1,29 @@
 
+function addToWishlist(productId) {
+
+    let wishlistItemCount = $("#wishlistItemCount");
+    $.ajax({
+        type: 'POST',
+        url: `/wishlist/add?productId=${productId}`,
+        success: function (data) {
+            wishlistItemCount.text(` (${data.count})`);
+        }
+    });
+}
+
+function removeFromWishlist(id) {
+
+    let wishlistItemCount = $("#wishlistItemCount");
+
+    $.ajax({
+        type: 'POST',
+        url: `/wishlist/remove?id=${id}`,
+        success: function (data) {
+            wishlistItemCount.text(` (${data.count})`);
+            $(`#tr${id}`).remove();
+        }
+    });
+}
 
 function addToCompare(productId) {
 

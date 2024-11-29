@@ -3,6 +3,6 @@ using Allup.Domain.Entities;
 
 namespace Allup.Application.Services.Abstracts;
 
-public interface ILanguageService : ICrudService<LanguageViewModel, Language>
+public interface ILanguageService : ICrudService<LanguageViewModel, Language, LanguageCreateViewModel>
 {
 }

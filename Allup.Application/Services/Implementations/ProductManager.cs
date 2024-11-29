@@ -15,7 +15,7 @@ using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations;
 
-public class ProductManager :  CrudManager<ProductViewModel, Product>, IProductService
+public class ProductManager :  CrudManager<ProductViewModel, Product, ProductCreateViewModel>, IProductService
 {
     private readonly EfRepositoryBase<Product, AppDbContext> _repository;
     private readonly ExternalApiService _externalApiService;

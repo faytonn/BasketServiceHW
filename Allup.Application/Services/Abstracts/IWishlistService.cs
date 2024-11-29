@@ -3,7 +3,8 @@ using Allup.Domain.Entities;
 
 namespace Allup.Application.Services.Abstracts;
 
-public interface IProductService : ICrudService<ProductViewModel, Product, ProductCreateViewModel>
+public interface IWishlistService : ICrudService<WishlistViewModel, Wishlist, WishlistCreateViewModel>
 {
 
 }
+

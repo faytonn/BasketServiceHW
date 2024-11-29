@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Allup.Application.Services.Implementations;
 
-public class CurrencyManager : CrudManager<CurrencyViewModel, Currency>,  ICurrencyService
+public class CurrencyManager : CrudManager<CurrencyViewModel, Currency, CurrencyCreateViewModel>,  ICurrencyService
 {
     private readonly EfRepositoryBase<Currency, AppDbContext> _currencyRepository;
 

@@ -5,9 +5,9 @@ using Core.Persistence.Repositories;
 
 namespace Allup.Persistence.Repositories.Implementations;
 
-public class CategoryRepository : EfRepositoryBase<Category, AppDbContext>, ICategoryRepository
+public class WishlistRepository : EfRepositoryBase<Wishlist, AppDbContext>, IWishlistRepository
 {
-    public CategoryRepository(AppDbContext context) : base(context)
+    public WishlistRepository(AppDbContext context) : base(context)
     {
     }
 }

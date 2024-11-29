@@ -18,4 +18,5 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public required DbSet<Product> Products { get; set; }
     public required DbSet<ProductTranslation> ProductTranslations { get; set; }
     public required DbSet<ProductImage> ProductImages { get; set; }
+    public required DbSet<Wishlist> WishlistItems { get; set; }
 }

@@ -3,6 +3,6 @@ using Allup.Domain.Entities;
 
 namespace Allup.Application.Services.Abstracts;
 
-public interface ICurrencyService : ICrudService<CurrencyViewModel, Currency>
+public interface ICurrencyService : ICrudService<CurrencyViewModel, Currency, CurrencyCreateViewModel>
 {
 }
