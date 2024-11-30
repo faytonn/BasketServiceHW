@@ -1,5 +1,6 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.UI.ViewModels;
+using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -69,16 +70,17 @@ namespace Allup.MVC.Controllers
                 basketItemViewModels.Add(new BasketItemViewModel
                 {
                     ProductId = existBasketItem.Id,
-                    Name = existBasketItem.Name,
-                    CoverImageUrl = existBasketItem.CoverImageUrl,
-                    Price = existBasketItem.Price,
+                    //Name = existBasketItem.Name,
+                    //CoverImageUrl = existBasketItem.CoverImageUrl,
+                    //Price = existBasketItem.Price,
                     Count = item.Count
                 });
             }
 
             //var totalAmount = basketItemViewModels.Sum(x => x.Price * x.Count);
 
-            basketViewModel.Items = basketItemViewModels;
+           /* basketViewModel.Items = basketItemViewModels;*/
+
             //basketViewModel.TotalAmount = totalAmount;
             
             return Json(basketViewModel);
@@ -116,16 +118,18 @@ namespace Allup.MVC.Controllers
                 basketItemViewModels.Add(new BasketItemViewModel
                 {
                     ProductId = existBasketItem.Id,
-                    Name = existBasketItem.Name,
-                    CoverImageUrl = existBasketItem.CoverImageUrl,
-                    Price = existBasketItem.Price,
+                    //Name = existBasketItem.Name,
+                    //CoverImageUrl = existBasketItem.CoverImageUrl,
+                    //Price = existBasketItem.Price,
                     Count = item.Count
                 });
             }
 
             //var totalAmount = basketItemViewModels.Sum(x => x.Price * x.Count);
 
-            basketViewModel.Items = basketItemViewModels;
+           
+            /* basketViewModel.Items = basketItemViewModels;*/
+            
             //basketViewModel.TotalAmount = totalAmount;
             return Json(basketViewModel);
         }

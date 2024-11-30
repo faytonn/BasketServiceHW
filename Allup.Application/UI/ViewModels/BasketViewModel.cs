@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Allup.Application.UI.ViewModels
+﻿namespace Allup.Application.UI.ViewModels
 {
     public class BasketCookieViewModel
     {
@@ -14,12 +8,12 @@ namespace Allup.Application.UI.ViewModels
 
     public class BasketViewModel
     {
-        public List<BasketItemViewModel>? Items { get; set; } = [];
+        public List<BasketProductViewModel>? Items { get; set; } = [];
         public int Count => Items.Sum(x => x.Count);
         public decimal TotalAmount => Items.Sum(x => x.Price * x.Count);
     }
 
-    public class BasketItemViewModel
+    public class BasketProductViewModel
     {
         public int ProductId { get; set; }
         public string? Name { get; set; }

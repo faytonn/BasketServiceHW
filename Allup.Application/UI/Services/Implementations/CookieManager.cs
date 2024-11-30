@@ -5,6 +5,7 @@ using Allup.Application.ViewModels;
 using Azure.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using System.Security.Claims;
 
 namespace Allup.Application.UI.Services.Implementations;
 
@@ -61,5 +62,16 @@ public class CookieManager : ICookieService
         var selectedLanguage = await _languageService.GetAsync(x => x.IsoCode == isoCode);
 
         return selectedLanguage;
+    }
+
+    public bool IsAuthorized()
+    {
+        return _contextAccessor.HttpContext.User.Identity?.IsAuthenticated ?? false;
+
+    }
+
+    public string GetUserId()
+    {
+        return _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
     }
 }

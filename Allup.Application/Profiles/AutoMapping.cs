@@ -1,4 +1,5 @@
-﻿using Allup.Application.ViewModels;
+﻿using Allup.Application.UI.ViewModels;
+using Allup.Application.ViewModels;
 using Allup.Domain.Entities;
 using AutoMapper;
 
@@ -18,5 +19,7 @@ public class AutoMapping : Profile
         CreateMap<CategoryTranslationViewModel, CategoryTranslation>().ReverseMap();
         CreateMap<Wishlist, WishlistViewModel>().ReverseMap();
         CreateMap<Wishlist, WishlistCreateViewModel>().ReverseMap();
+        CreateMap<BasketItem, BasketItemViewModel>().ReverseMap();
+        CreateMap<BasketItemViewModel, BasketProductViewModel>().ReverseMap();
     }
 }

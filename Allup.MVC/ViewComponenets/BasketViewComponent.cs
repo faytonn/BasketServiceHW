@@ -1,5 +1,6 @@
 ﻿using Allup.Application.Services.Abstracts;
 using Allup.Application.UI.ViewModels;
+using Allup.Application.ViewModels;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
@@ -48,17 +49,19 @@ namespace Allup.MVC.ViewComponenets
                 basketItemViewModels.Add(new BasketItemViewModel
                 {
                     ProductId = existBasketItem.Id,
-                    Name = existBasketItem.Name,
-                    Price = existBasketItem.Price,
-                    CoverImageUrl = existBasketItem?.CoverImageUrl,
-                    FormattedPrice = existBasketItem?.FormattedPrice,
+                    //Name = existBasketItem.Name,
+                    //Price = existBasketItem.Price,
+                    //CoverImageUrl = existBasketItem?.CoverImageUrl,
+                    //FormattedPrice = existBasketItem?.FormattedPrice,
                     Count = item.Count
                 });
             }
 
             //var totalAmount = basketItemViewModels.Sum(x => x.Price * x.Count);
 
-            basketViewModel.Items = basketItemViewModels;
+            //basketViewModel.Items = basketItemViewModels;
+
+
             //basketViewModel.TotalAmount = totalAmount;
             TempData["Count"] = basketViewModel.Count;
             return View(basketViewModel);

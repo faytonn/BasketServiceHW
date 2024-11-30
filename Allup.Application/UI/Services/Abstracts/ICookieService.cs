@@ -8,4 +8,6 @@ public interface ICookieService
     Task<CurrencyViewModel> GetCurrencyAsync();
     void AddBrowserId();
     string GetBrowserId();
+    bool IsAuthorized();
+    string GetUserId();
 }

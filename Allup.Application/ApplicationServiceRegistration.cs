@@ -42,6 +42,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICookieService, CookieManager>();
         services.AddScoped<IWishlistService, WishlistManager>();
         services.AddScoped<IWishlistUiService, WishlistUiManager>();
+        services.AddScoped<IBasketItemService, BasketItemService>();
 
         services.AddSingleton<StringLocalizerService>();
 
